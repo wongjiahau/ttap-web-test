@@ -11,7 +11,7 @@ commit_coverage_report() {
 }
 
 upload_files() {
-  git remote add origin-pages https://${GH_TOKEN}@github.com/wongjiahau/ttap-web.git > /dev/null 2>&1
+  git remote add origin-pages https://${GH_TOKEN}@github.com/wongjiahau/ttap-web-test.git > /dev/null 2>&1
   git push --set-upstream origin-pages code-cov -f
 }
 
@@ -19,8 +19,6 @@ rm ./.travis.yml #remove this file so that travis won't run build on the code-co
 mv codecov.travis.yml .travis.yml #let travis upload code coverage report
 
 sed -i '/coverage/d' ./.gitignore #cancel ignore coverage directory
-sed -i '/core/d' ./.gitignore #cancel ignore core directory which store the transpiled TS
 setup_git
 commit_coverage_report
 upload_files
-codecov
